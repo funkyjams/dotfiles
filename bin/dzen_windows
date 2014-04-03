@@ -1,6 +1,8 @@
 #!/bin/bash
 # Dzen Popup displaying all window on current desktop
 
+
+# Font and colors:
 font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
 
 bgn='#303030'
@@ -9,24 +11,21 @@ fgn='#eeeeee'
 fgs='#ac4142'
 
 
-# Define Custom colors:
-red='#xxxxxx'
-orange='#xxxxxx'
-yellow='#xxxxxx'
-green='#xxxxxx'
-blue='#xxxxxx'
-
+# Line number and width:
 num=$(wmctrl -l | wc -l)
+len=$(wmctrl -l | wc -L)
+stringlen=$(( $len - 28))
+width=$((30 + $(($stringlen * 6 ))  ))
 
-WindowList(){
-	wmctrl -l | awk '{print $4 " " $NF}'	
-}
 
-
+# Using awk:
 (echo "Open windows:" ;\
-wmctrl -l | while read line; do echo $line | awk '{printf "^ca(1, wmctrl -i -a "$1")"; $2="^c(7)"; $1=$3="";print $0 "^ca() "}'; done ) | \
-dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w 340
+wmctrl -l \
+| while read line; do echo $line | awk '{printf "^ca(1, wmctrl -i -a "$1")"; $2="^c(7)"; $1=$3="";print $0 "^ca() "}'; done ) | \
+dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $width
 
 
-# (echo "Windows:";echo "$(WindowList)" ; sleep 5 )| dzen2 -m -l $num -e 'onstart=uncollapse;button1=exit' -h 18 -y 20 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w 210 -x 65
-
+# Failed bash attempt
+# (echo "Open windows:" ;\
+# wmctrl -l | while read line; do echo "^ca(1, wmctrl -i -a"  ${line:0:10}")" ${line:28}"^ca()"; done) | \ 
+# dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $width
