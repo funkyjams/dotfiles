@@ -1,0 +1,92 @@
+#!/bin/bash
+
+
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+#font="-*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8850-*1"
+#font='fixed'
+
+bgn='#303030'
+bgs='#ac4142'
+fgn='#eeeeee'
+fgs='#ac4142'
+
+
+# Define Custom colors:
+red='#ac4142'
+orange='#d6a372'
+yellow='#d6bd72'
+green='#769e3c'
+blue='#2b5d6b'
+
+
+# Number of temp's displayed:
+num=5
+
+Desktop_counter(){
+	str=" "
+	#symbol=$(echo -e '\xE2\x97\x8F')
+	symbol="^c(7)"
+
+	desknum=$(wmctrl -d | grep \* | awk '{print $1}')
+
+	for num in $(wmctrl -d | awk '{print $1}');
+	do	
+		if [ $desknum == $num ]; then
+			str="$str^fg($fgs)$symbol^fg($fgn) "
+		else
+			str="$str^ca(1, xdotool key ctrl+$(expr $num + 1))^fg($fgn)$symbol ^ca()"
+		fi 
+	done
+
+	echo $str
+}
+
+Desktop_name(){
+	echo $(wmctrl -d | grep \* | awk '{print ($NF)}')
+}
+
+Window_name(){
+	name=$(xdotool getwindowname $(xdotool getwindowfocus))
+	if [ "$name" == "Openbox" ]; then
+		echo ""
+	else
+		echo "^bg($bgs) $name ^bg($bgn)"
+	fi
+}
+
+Temp(){
+	str=""
+	for val in $(temp $num);
+	do
+		temp="${val%????}"
+		temp2="${temp#?}"
+		symb="^c(7)"
+		# symb=$val
+
+		if [ $temp2 -gt 90 ]; then
+			str="$str ^fg($red)$symb)^fg()"
+		elif [ $temp2 -gt 75 ]; then
+			str="$str ^fg($orange)$symb^fg()"
+		elif [ $temp2 -gt 50 ]; then
+			str="$str ^fg($yellow)$symb^fg()"
+		elif [ $temp2 -gt 25 ]; then
+			str="$str ^fg($green)$symb^fg()"
+		else
+			str="$str ^fg($blue)$symb^fg()"
+		fi
+	done
+	echo $str
+}
+
+Date(){
+	echo "$(date "+%a %b %e %Y | %H:%M:%S")"
+}
+
+
+while :
+do
+	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1385) ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()    ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
+	sleep 0.2
+done | dzen2 -u -p -h 18 -ta l -fn $font -fg $fgn -bg $bgn -x 0 -y 0 -e 'button2=;'
+
+

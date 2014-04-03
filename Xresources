@@ -1,0 +1,191 @@
+!==== Xresources ====!
+
+
+!--- URxvt Specification --- !
+
+! URxvt*rxvt-unicode (urxvt) v9.19 - released: 2013-10-27
+! URxvt*options: xft,styles,combining,blink,iso14755,encodings=eu+vn+jp+jp-ext+kr+zh+zh-ext,fade,transparent,tint,pixbuf,XIM,frills,selectionscrolling,wheel,slipwheel,cursorBlink,pointerBlank,scrollbars=plain+rxvt+NeXT+xterm
+! URxvt*Usage: urxvt [options] [-e command args]
+! URxvt*termName:                       URxvt
+! URxvt*geometry:                       geometry
+! URxvt*chdir:                          string
+! URxvt*reverseVideo:                   boolean
+! URxvt*loginShell:                     boolean
+! URxvt*jumpScroll:                     boolean
+! URxvt*skipScroll:                     boolean
+! URxvt*pastableTabs:                   boolean
+! URxvt*scrollstyle:                    mode
+URxvt*scrollBar:                      false
+! URxvt*scrollBar_right:                boolean
+! URxvt*scrollBar_floating:             boolean
+! URxvt*scrollBar_align:                mode
+! URxvt*thickness:                      number
+! URxvt*scrollTtyOutput:                boolean
+! URxvt*scrollTtyKeypress:              boolean
+! URxvt*scrollWithBuffer:               boolean
+! URxvt*inheritPixmap:                  boolean
+! URxvt*transparent:                    boolean
+! URxvt*tintColor:                      color
+! URxvt*shading:                        number
+URxvt*blurRadius:                     1x1
+! URxvt*fading:                         number
+! URxvt*fadeColor:                      color
+! URxvt*utmpInhibit:                    boolean
+! URxvt*urgentOnBell:                   boolean
+! URxvt*visualBell:                     boolean
+! URxvt*mapAlert:                       boolean
+! URxvt*meta8:                          boolean
+! URxvt*mouseWheelScrollPage:           boolean
+! URxvt*tripleclickwords:               boolean
+! URxvt*insecure:                       boolean
+! URxvt*cursorUnderline:                boolean
+! URxvt*cursorBlink:                    boolean
+! URxvt*pointerBlank:                   boolean
+
+
+! --- special colors ---
+URxvt*background:                     [65]#101010
+URxvt*foreground:                     #FFFFFF
+! *background: #3d3e41
+! *foreground: #e3e4e8
+
+! --- standard colors ---
+
+! black
+*color0: #0d1926
+
+! bright_black
+*color8: #222f3c
+
+! red
+*color1: #f73b67
+
+! bright_red
+*color9: #fa8aa4
+
+! green
+*color2: #67f73b
+
+! bright_green
+*color10: #a4fa8a
+
+! yellow
+*color3: #f7cc3b
+
+! bright_yellow
+*color11: #fae08a
+
+! blue
+*color4: #3b67f7
+
+! bright_blue
+*color12: #8aa4fa
+
+! magenta
+*color5: #cc3bf7
+
+! bright_magenta
+*color13: #e08afa
+
+! cyan
+*color6: #3bf7cc
+
+! bright_cyan
+*color14: #8afae0
+
+! white
+*color7: #b9c5d2
+
+! bright_white
+*color15: #d9e5f2
+
+! URxvt*color0:                         color
+! URxvt*color1:                         color
+! URxvt*color2:                         color
+! URxvt*color3:                         color
+! URxvt*color4:                         color
+! URxvt*color5:                         color
+! URxvt*color6:                         color
+! URxvt*color7:                         color
+! URxvt*color8:                         color
+! URxvt*color9:                         color
+! URxvt*color10:                        color
+! URxvt*color11:                        color
+! URxvt*color12:                        color
+! URxvt*color13:                        color
+! URxvt*color14:                        color
+! URxvt*color15:                        color
+! URxvt*colorBD:                        color
+! URxvt*colorIT:                        color
+! URxvt*colorUL:                        color
+! URxvt*colorRV:                        color
+
+
+! URxvt*underlineColor:                 color
+! URxvt*scrollColor:                    color
+! URxvt*troughColor:                    color
+! URxvt*highlightColor:                 color
+! URxvt*highlightTextColor:             color
+! URxvt*cursorColor:                    color
+! URxvt*cursorColor2:                   color
+! URxvt*pointerColor:                   color
+! URxvt*pointerColor2:                  color
+! URxvt*borderColor:                    color
+! URxvt*path:                           search path
+! URxvt*backgroundPixmap:               file[;geom]
+URxvt*iconFile:                       /usr/share/icons/gnome/scalable/apps/terminal.svg
+URxvt*font:                          xft:inconsolata:size=10 
+! URxvt*boldFont:                       fontname
+! URxvt*italicFont:                     fontname
+! URxvt*boldItalicFont:                 fontname
+! URxvt*intensityStyles:                boolean
+! URxvt*inputMethod:                    name
+! URxvt*preeditType:                    style
+! URxvt*imLocale:                       string
+! URxvt*imFont:                         fontname
+! URxvt*title:                          string
+! URxvt*iconName:                       string
+! URxvt*saveLines:                      number
+! URxvt*buffered:                       boolean
+URxvt*depth:                          32
+! URxvt*visual:                         number
+! URxvt*transient-for:                  windowid
+! URxvt*override-redirect:              boolean
+! URxvt*hold:                           boolean
+! URxvt*externalBorder:                 number
+! URxvt*internalBorder:                 number
+! URxvt*borderLess:                     boolean
+! URxvt*lineSpace:                      number
+! URxvt*letterSpace:                    number
+! URxvt*skipBuiltinGlyphs:              boolean
+! URxvt*pointerBlankDelay:              number
+! URxvt*backspacekey:                   string
+! URxvt*deletekey:                      string
+! URxvt*print-pipe:                     string
+! URxvt*modifier:                       modifier
+! URxvt*cutchars:                       string
+! URxvt*answerbackString:               string
+! URxvt*secondaryScreen:                boolean
+! URxvt*secondaryScroll:                boolean
+! URxvt*iso14755:                       boolean
+! URxvt*iso14755_52:                    boolean
+! URxvt*xrm:                            string
+! URxvt*keysym.sym:                     keysym
+
+
+! -- Clickable urls:
+
+URxvt.perl-ext-common: 			default,matcher,vtwheel,font-size
+URxvt.url-launcher: 			/usr/bin/firefox
+URxvt.matcher.button:			1
+URxvt.colorUL:				#8aa4fa
+
+
+
+! -- Variable font size
+URxvt.keysym.C-equal:			perl:font-size:increase
+URxvt.keysym.C-minus:			perl:font-size:decrease
+!URxvt.keysym.C-0: command:\033]710;xft:inconsolata:size=10\007
+!URxvt.keysym.C-minus: command:\033]710;xft:inconsolata:size=8\007
+!URxvt.keysym.C-equal: command:\033]710;xft:inconsolata:size=12\007
+

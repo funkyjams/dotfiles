@@ -1,0 +1,19 @@
+#!/bin/bash
+# Dzen Calendar display
+
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+
+bgn='#303030'
+bgs='#ac4142'
+fgn='#eeeeee'
+fgs='#ac4142'
+
+Cal_title(){
+	echo $(cal | head -n 1)
+}
+Cal_height(){
+	echo $(cal -m | tail -n +2 | wc -l)
+}
+
+($(Cal_title); cal -m; sleep 6) | dzen2 -m -l $(Cal_height) -e 'onstart=uncollapse;button1=exit' -ta c -sa c -fn $font -fg $fgn -bg $bgn -w 140 -x 1500 -y 20
+

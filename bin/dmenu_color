@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# font="fixed"
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+
+dmenu_run -i -p ">" -h 18 -nb "#303030" -nf "#eeeeee" -sb "#ac4142"
