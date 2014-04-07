@@ -18,14 +18,12 @@ stringlen=$(( $len - 28))
 width=$((30 + $(($stringlen * 6 ))  ))
 
 
-# Using awk:
-(echo "Open windows:" ;\
-wmctrl -l \
-| while read line; do echo $line | awk '{printf "^ca(1, wmctrl -i -a "$1")"; $2="^c(7)"; $1=$3="";print $0 "^ca() "}'; done ) | \
-dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $width
+desknum=$(wmctrl -d | grep \* | awk '{print $1}')
+
+# Bash version
+(echo "Open windows:" ; wmctrl -l | while read line; do \
+[[ ${line:12:1} == $desknum ]] && \
+echo "^ca(1, wmctrl -i -a "${line:0:10} ") ^fg($fgs)^c(7)^fg()" ${line:28} "^ca()" || \
+echo "^ca(1, wmctrl -i -a "${line:0:10} ") ^fg()^c(7)" ${line:28} "^ca()"; done) | dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $width
 
 
-# Failed bash attempt
-# (echo "Open windows:" ;\
-# wmctrl -l | while read line; do echo "^ca(1, wmctrl -i -a"  ${line:0:10}")" ${line:28}"^ca()"; done) | \ 
-# dzen2 -p 5 -m -l $num -e 'onstart=uncollapse;button3=exit' -h 18 -y 20 -x 70 -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $width
