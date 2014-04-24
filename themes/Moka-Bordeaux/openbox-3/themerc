@@ -15,7 +15,9 @@ menu.overlap.x: -5
 menu.overlap.y: 0
 
 # Border colors
-window.*.border.color: #303030
+window.inactive.border.color: #303030
+window.active.border.color: #AC4142
+window.active.title.separator.color: #303030
 menu.border.color: #303030
 window.active.client.color: #303030
 window.inactive.client.color: #303030

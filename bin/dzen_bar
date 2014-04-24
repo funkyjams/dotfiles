@@ -82,10 +82,13 @@ Date(){
 	echo "$(date "+%a %b %e %Y | %H:%M:%S")"
 }
 
+IPaddress(){
+	echo $(ip a | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}')
+}
 
 while :
 do
-	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1385) ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()    ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
+	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1250) IP: ^fg($orange)$(IPaddress)^fg()   ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()    ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
 	sleep 0.2
 done | dzen2 -u -p -h 18 -ta l -fn $font -fg $fgn -bg $bgn -x 0 -y 0 -e 'button2=;'
 

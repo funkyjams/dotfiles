@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
   <resistance>
     <strength>10</strength>
@@ -408,7 +409,7 @@
     <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
-    <context name="Frame"><mousebind action="Press" button="A-Left"><action name="Focus"/><action name="Raise"/></mousebind><mousebind action="Click" button="A-Left"><action name="Unshade"/></mousebind><mousebind action="Drag" button="A-Left"><action name="Move"/></mousebind>module avail’ will list all applications an
+    <context name="Frame"><mousebind action="Press" button="A-Left"><action name="Focus"/><action name="Raise"/></mousebind><mousebind action="Click" button="A-Left"><action name="Unshade"/></mousebind><mousebind action="Drag" button="A-Left"><action name="Move"/></mousebind>module avail&#x2019; will list all applications an
       <mousebind action="Press" button="A-Right"><action name="Focus"/><action name="Raise"/><action name="Unshade"/></mousebind>
       <mousebind action="Drag" button="A-Right"><action name="Resize"/></mousebind>
       <mousebind action="Press" button="A-Middle"><action name="Lower"/><action name="FocusToBottom"/><action name="Unfocus"/></mousebind>
@@ -424,7 +425,7 @@
         <action name="Move"/>
       </mousebind>
       <mousebind action="DoubleClick" button="Left">
-        <action name="ToggleMaximize"/>
+        <action xmlns="http://openbox.org/3.4/rc" name="ToggleMaximize"/>
       </mousebind>
       <mousebind action="Click" button="Up">
         <action name="if">
@@ -701,7 +702,7 @@
   <!-- show the manage desktops section in the client-list-(combined-)menu -->
 </menu>
   <applications>
-    <application name="urxvt">
+    <application class="*">
       <decor>no</decor>
     </application>
     <!--
