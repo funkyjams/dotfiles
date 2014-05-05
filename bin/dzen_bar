@@ -1,26 +1,32 @@
 #!/bin/bash
+# Dzen bar generator
 
 
+# Font and colors:
 font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
-#font="-*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8850-*1"
-#font='fixed'
 
 bgn='#303030'
 bgs='#ac4142'
 fgn='#eeeeee'
 fgs='#ac4142'
 
-
-# Define Custom colors:
 red='#ac4142'
 orange='#d6a372'
 yellow='#d6bd72'
 green='#769e3c'
 blue='#2b5d6b'
 
+# X, Y offset, Height
+X=0
+Y=0
+H=18
+
+# Refresh rate:
+T=0.2
 
 # Number of temp's displayed:
 num=5
+
 
 Desktop_counter(){
 	str=" "
@@ -56,7 +62,7 @@ Window_name(){
 
 Temp(){
 	str=""
-	for val in $(temp $num);
+	for val in $(new_temp $num);
 	do
 		temp="${val%????}"
 		temp2="${temp#?}"
@@ -83,13 +89,33 @@ Date(){
 }
 
 IPaddress(){
-	echo $(ip a | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}')
+	str=$(ip a | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}')
+	echo ${str%???}
+}
+
+SpaceAvail(){
+	space=$(df -h | grep home | awk '{print $3}')
+	ratio=$(df -h | grep home | awk '{print $4}')
+	num=${ratio%?}
+
+	if [ $num -gt 90 ]; then
+		space="^fg($red)$space^fg()"
+	elif [ $num -gt 70 ]; then
+		space="^fg($orange)$space^fg()"
+	elif [ $num -gt 50 ]; then
+		space="^fg($yellow)$space^fg()"
+	else
+		space="^fg($green)$space^fg()"
+	fi
+
+	#echo $(df -h | grep home | awk '{print $3}')
+	echo $space
 }
 
 while :
 do
-	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1250) IP: ^fg($orange)$(IPaddress)^fg()   ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()    ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
-	sleep 0.2
-done | dzen2 -u -p -h 18 -ta l -fn $font -fg $fgn -bg $bgn -x 0 -y 0 -e 'button2=;'
+	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1160) ^ca(1, ~/.bin/dzen_volume)Available:$(SpaceAvail)^ca()   ^ca(1, ~/.bin/dzen_net)IP: ^fg($orange)$(IPaddress)^fg()^ca()   ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()   ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
+	sleep $T
+done | dzen2 -u -p -ta l -fn $font -fg $fgn -bg $bgn -h $H -x $X -y $Y -e 'button2=;'
 
 

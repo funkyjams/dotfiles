@@ -1,12 +1,30 @@
 #!/bin/bash
 # Dzen Calendar display
 
+
+# Font and Colors
 font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
 
 bgn='#303030'
 bgs='#ac4142'
 fgn='#eeeeee'
 fgs='#ac4142'
+
+red='#ac4142'
+orange='#d6a372'
+yellow='#d6bd72'
+green='#769e3c'
+blue='#2b5d6b'
+
+# Position
+H=18
+W=135
+X=1500
+Y=20
+
+# How long does popu last
+T=5
+
 
 Cal_title(){
 	echo $(cal | head -n 1)
@@ -15,5 +33,5 @@ Cal_height(){
 	echo $(cal -m | tail -n +2 | wc -l)
 }
 
-($(Cal_title); cal -m; sleep 6) | dzen2 -m -l $(Cal_height) -e 'onstart=uncollapse;button1=exit' -ta c -sa c -fn $font -fg $fgn -bg $bgn -w 140 -x 1500 -y 20
+(echo $(Cal_title); cal -m | while read line; do echo " $line"; done; sleep $T) | dzen2 -m -l $(Cal_height) -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
 

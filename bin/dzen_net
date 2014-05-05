@@ -1,0 +1,52 @@
+#!/bin/bash
+# Dzen Popup displaying current upload and download speeds
+
+
+# Font and colors:
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+
+bgn='#303030'
+bgs='#ac4142'
+fgn='#eeeeee'
+fgs='#ac4142'
+
+red='#ac4142'
+orange='#d6a372'
+yellow='#d6bd72'
+green='#769e3c'
+blue='#2b5d6b'
+
+# Position
+H=18
+W=100
+X=1270
+Y=20
+
+# How long does popu last
+T=5
+
+
+# Code
+Up(){
+T1=$(cat /sys/class/net/eth1/statistics/tx_bytes)
+sleep 1
+T2=$(cat /sys/class/net/eth1/statistics/tx_bytes)
+
+TBPS=$(expr $T2 - $T1)
+TKBPS=$(expr $TBPS / 1024)
+
+echo $TKBPS
+}
+
+Down(){
+R1=$(cat /sys/class/net/eth1/statistics/rx_bytes)
+sleep 1
+R2=$(cat /sys/class/net/eth1/statistics/rx_bytes)
+
+RBPS=$(expr $R2 - $R1)
+RKBPS=$(expr $RBPS / 1024)
+echo $RKBPS
+}
+
+(echo "Eth0" ; for i in $(seq 1 $T); do echo -e " Up: $(Up)kB/s\n Down: $(Down)kB/s"; done ; sleep $T) | dzen2 -m -l 2 -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
+

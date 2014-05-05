@@ -1,0 +1,85 @@
+#!/bin/bash
+# Dzen Popup displaying all volumes available
+
+
+# Font and colors:
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+
+bgn='#303030'
+bgs='#ac4142'
+fgn='#eeeeee'
+fgs='#ac4142'
+
+red='#ac4142'
+orange='#d6a372'
+yellow='#d6bd72'
+green='#769e3c'
+blue='#2b5d6b'
+
+# Position
+H=18
+W=120
+X=1140
+Y=20
+
+# How long does popu last
+T=5
+
+
+Root(){
+	space=$(df -h | grep " /$" | awk '{print $3}')
+	ratio=$(df -h | grep " /$" | awk '{print $4}')
+	num=${ratio%?}
+
+	if [ $num -gt 90 ]; then
+		space="^fg($red)$space^fg()"
+	elif [ $num -gt 70 ]; then
+		space="^fg($orange)$space^fg()"
+	elif [ $num -gt 50 ]; then
+		space="^fg($yellow)$space^fg()"
+	else
+		space="^fg($green)$space^fg()"
+	fi
+
+	echo $space
+}
+
+Labshare(){
+	space=$(df -h | grep "LabShare" | awk '{print $3}')
+	ratio=$(df -h | grep "LabShare" | awk '{print $4}')
+	num=${ratio%?}
+
+	if [ $num -gt 90 ]; then
+		space="^fg($red)$space^fg()"
+	elif [ $num -gt 70 ]; then
+		space="^fg($orange)$space^fg()"
+	elif [ $num -gt 50 ]; then
+		space="^fg($yellow)$space^fg()"
+	else
+		space="^fg($green)$space^fg()"
+	fi
+
+	echo $space
+}
+
+Home(){
+	space=$(df -h | grep "home" | awk '{print $3}')
+	ratio=$(df -h | grep "home" | awk '{print $4}')
+	num=${ratio%?}
+
+	if [ $num -gt 90 ]; then
+		space="^fg($red)$space^fg()"
+	elif [ $num -gt 70 ]; then
+		space="^fg($orange)$space^fg()"
+	elif [ $num -gt 50 ]; then
+		space="^fg($yellow)$space^fg()"
+	else
+		space="^fg($green)$space^fg()"
+	fi
+
+	echo $space
+}
+
+
+(echo Volumes; echo " Root:" $(Root); echo " Home:" $(Home); echo " LabShare:" $(Labshare); sleep $T) | dzen2 -m -l 3 -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
+
