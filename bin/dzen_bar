@@ -62,7 +62,7 @@ Window_name(){
 
 Temp(){
 	str=""
-	for val in $(new_temp $num);
+	for val in $(core-temp $num);
 	do
 		temp="${val%????}"
 		temp2="${temp#?}"
@@ -108,13 +108,12 @@ SpaceAvail(){
 		space="^fg($green)$space^fg()"
 	fi
 
-	#echo $(df -h | grep home | awk '{print $3}')
 	echo $space
 }
 
 while :
 do
-	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1160) ^ca(1, ~/.bin/dzen_volume)Available:$(SpaceAvail)^ca()   ^ca(1, ~/.bin/dzen_net)IP: ^fg($orange)$(IPaddress)^fg()^ca()   ^ca(1,~/.bin/dzen_tpop)Temp: $(Temp)^ca()   ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
+	echo " ^pa(8)$(Desktop_counter) ^pa(60): ^ca(1,~/.bin/dzen_windows) $(Desktop_name)^ca() ^pa(140) $(Window_name) ^pa(1160) ^ca(1, ~/.bin/dzen_volume)Available:$(SpaceAvail)^ca()   ^ca(1, ~/.bin/dzen_net)IP: ^fg($orange)$(IPaddress)^fg()^ca()   ^ca(1,~/.bin/dzen_temperature)Temp: $(Temp)^ca()   ^ca(1,~/.bin/dzen_cal)$(Date)^ca() "
 	sleep $T
 done | dzen2 -u -p -ta l -fn $font -fg $fgn -bg $bgn -h $H -x $X -y $Y -e 'button2=;'
 

@@ -32,13 +32,13 @@ Root(){
 	num=${ratio%?}
 
 	if [ $num -gt 90 ]; then
-		space="^fg($red)$space^fg()"
+		space="^fg($red) $space ^fg()"
 	elif [ $num -gt 70 ]; then
-		space="^fg($orange)$space^fg()"
+		space="^fg($orange) $space ^fg()"
 	elif [ $num -gt 50 ]; then
-		space="^fg($yellow)$space^fg()"
+		space="^fg($yellow) $space ^fg()"
 	else
-		space="^fg($green)$space^fg()"
+		space="^fg($green) $space ^fg()"
 	fi
 
 	echo $space
@@ -49,14 +49,16 @@ Labshare(){
 	ratio=$(df -h | grep "LabShare" | awk '{print $4}')
 	num=${ratio%?}
 
-	if [ $num -gt 90 ]; then
-		space="^fg($red)$space^fg()"
+	if [ $num == ""]; then
+		space="^fg($yellow) ? ^fg()"
+	elif [ $num -gt 90 ]; then
+		space="^fg($red)$space ^fg()"
 	elif [ $num -gt 70 ]; then
-		space="^fg($orange)$space^fg()"
+		space="^fg($orange)$space ^fg()"
 	elif [ $num -gt 50 ]; then
-		space="^fg($yellow)$space^fg()"
+		space="^fg($yellow)$space ^fg()"
 	else
-		space="^fg($green)$space^fg()"
+		space="^fg($green)$space ^fg()"
 	fi
 
 	echo $space
@@ -68,13 +70,13 @@ Home(){
 	num=${ratio%?}
 
 	if [ $num -gt 90 ]; then
-		space="^fg($red)$space^fg()"
+		space="^fg($red)$space ^fg()"
 	elif [ $num -gt 70 ]; then
-		space="^fg($orange)$space^fg()"
+		space="^fg($orange)$space ^fg()"
 	elif [ $num -gt 50 ]; then
-		space="^fg($yellow)$space^fg()"
+		space="^fg($yellow)$space ^fg()"
 	else
-		space="^fg($green)$space^fg()"
+		space="^fg($green)$space ^fg()"
 	fi
 
 	echo $space

@@ -32,6 +32,19 @@ Cal_title(){
 Cal_height(){
 	echo $(cal -m | tail -n +2 | wc -l)
 }
+TODAY=$(date +%e)
 
-(echo $(Cal_title); cal -m | while read line; do echo " $line"; done; sleep $T) | dzen2 -m -l $(Cal_height) -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
+i=0
+
+(echo $(Cal_title); \
+cal -m | while read line; \
+do
+
+	newline=$(sed "s/ \([0-9]\) / & /g;s/$TODAY / ^bg($bgs)$TODAY ^bg()/g" <<< $line)
+	[[ $i ==  2 ]] && printf "%20s\n" "$newline" || echo " $newline"; \
+	i=$(expr $i + 1);\
+ 
+done; sleep $T) | \
+dzen2 -m -l $(Cal_height) -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
+
 

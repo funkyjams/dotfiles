@@ -48,5 +48,6 @@ RKBPS=$(expr $RBPS / 1024)
 echo $RKBPS
 }
 
-(echo "Eth0" ; for i in $(seq 1 $T); do echo -e " Up: $(Up)kB/s\n Down: $(Down)kB/s"; done ; sleep $T) | dzen2 -m -l 2 -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
+
+(echo "Eth0" ; for i in $(seq 0 $T); do [[ $i == 0 ]] && echo -e " Waiting \n for results " ||echo -e " Up: $(Up)kB/s\n Down: $(Down)kB/s"; done ; sleep $T) | dzen2 -m -l 2 -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa l -fn $font -fg $fgn -bg $bgn -w $W -h $H -x $X -y $Y
 

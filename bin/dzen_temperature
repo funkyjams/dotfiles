@@ -1,0 +1,62 @@
+#!/bin/bash
+# Dzen Popup displaying highest $num core temperatures
+
+
+# Font and colors
+font="-*-inconsolata-*-*-*-*-12-*-*-*-*-*-iso8850-*"
+
+bgn='#303030'
+bgs='#ac4142'
+fgn='#eeeeee'
+fgs='#ac4142'
+
+
+# Define Custom colors:
+red='#ac4142'
+orange='#d6a372'
+yellow='#d6bd72'
+green='#769e3c'
+blue='#2b5d6b'
+
+# Position
+H=18
+W=90
+X=1400
+Y=20
+
+# How long is popup displayed
+T=4
+
+# Number of temp's displayed:
+num=7
+
+
+Templist(){
+	str=""
+	for val in $(core-temp $num);
+	do
+		temp="${val%????}"
+		temp2="${temp#?}"
+		symb="^c(7)"
+		# symb=$val
+
+		if [ $temp2 -gt 80 ]; then
+			echo "$str ^fg($red)$symb)^fg() $val;"
+		elif [ $temp2 -gt 60 ]; then
+			echo "$str ^fg($orange)$symb^fg() $val;"
+		elif [ $temp2 -gt 50 ]; then
+			echo "$str ^fg($yellow)$symb^fg() $val;"
+		elif [ $temp2 -gt 30 ]; then
+			echo "$str ^fg($green)$symb^fg() $val;"
+		else
+			echo "$str ^fg($blue)$symb^fg() $val;"
+		fi
+	done
+}
+
+
+(echo "Core Temp:"; \
+for i in $(seq 1 $T); do echo "$(Templist)"; sleep 1; \
+done) | dzen2 -m -p $T -l $num -e 'onstart=uncollapse;button1=exit;button3=exit' -ta c -sa c -fn $font -fg $fgn -bg $bgn -h $H -w $W -x $X -y $Y
+
+

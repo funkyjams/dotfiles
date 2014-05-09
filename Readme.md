@@ -40,6 +40,12 @@ Displays the temperature of a set number of cores. Set it to whatever you like. 
 #### dzen_windows
 If you click on your desktop name, a popup shows up and lists the windows open on all desktop (I counldn't find a way to be desktop specific). And if you click on the name of a window, it switches to it. Isn't this awesome?!? This one was definitely my favorite/hardest to code.
 
+#### dzen_volume
+This popup shows the volumes mounted and how much space is available on each of these. Color corresponds to percentage of available space. Obviously this will require some adjustments on other systems.
+
+#### dzen_net
+Shows the upload and download rate for a given connection (here eth1). I have not found a way to make it instataneous yet.
+
 
 ### URxvt
 
