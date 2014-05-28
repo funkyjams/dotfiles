@@ -66,7 +66,7 @@ Allows you to create keybindings to change the font size on the fly.
 
 ### Dmenu
 
-I use a fork of dmenu: https://aur.archlinux.org/packages/urxvt-font-size-git/. It has a few cool patches: xft support and qwxyh (Quiet, Width, Height, X and Y position (I dont use the Q)).
+I use a fork of dmenu: https://github.com/mil/dmenu-q-xywh-xft. It has a few cool patches: xft support and qwxyh (Quiet, Width, Height, X and Y position (I dont use the Q)).
 
 
 ### Background:
